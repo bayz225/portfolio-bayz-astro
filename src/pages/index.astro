@@ -1,7 +1,8 @@
 ---
-import SkillAccordionHeader from '@components/SkillAccordionHeader.astro';
 import Layout from '@layouts/Layout.astro';
-
+import SectionHeader from '@components/SectionHeader.astro';
+import SectionContact from '@components/SectionContact.astro'
+import SkillAccordionHeader from '@components/SkillAccordionHeader.astro';
 
 const skills = [
 	{
@@ -22,6 +23,7 @@ const skills = [
 		exp: new Date().getFullYear() - 2021,
 		techno: [
 			{label: "Php", lvl: 65 },
+			{label: "MySQL - SQL", lvl: 85 },
 			{label: "Laravel", lvl: 70 },
 			{label: "Synfony", lvl: 67 },
 		]
@@ -37,6 +39,8 @@ const skills = [
 		]
 	},
 ];
+
+const experienceYears = new Date().getFullYear() - 2020;
 ---
 
 <Layout title="Bayz portfolio">
@@ -105,14 +109,7 @@ const skills = [
 		</section>
 
 		<section id="skills" class="px-2 sm:px-[25px] md:px-[50px] lg:px-[100px] sm:pt-[50px] md:pt-[100px] my-[100px]">
-			<div class="text-center">
-				<h2 class="text-lg sm:text-3xl md:text-4xl font-semibold mb-6">
-					Mes Compétences
-				</h2>
-				<p class="text-sm sm:text-base md:text-lg">
-					Des compétences à votre service <img src="/assets/s.svg" alt="" srcset="">
-				</p>
-			</div>
+			<SectionHeader title='Mes Compétences' description='Des compétences à votre service'/>
 
 			<div id="accordion-collapse" data-accordion="collapse">
 				<div class="mt-8 grid sm:grid-cols-1 md:grid-cols-2 gap-8">
@@ -124,9 +121,67 @@ const skills = [
 				</div>
 			</div>
 		</section>
+
+		<section id="about-me" class="px-2 sm:px-[25px] md:px-[50px] lg:px-[100px] sm:pt-[50px] md:pt-[100px] my-[100px]">
+			<SectionHeader title='À propos' description="Je suis développeur web freelance et j'aime ça !"/>
+
+			<div class="grid sm:grid-cols-1 md:grid-cols-2 gap-4 mt-[50px]">
+				<div class="flex justify-center md:justify-normal">
+					<img class="sm:w-[400px] sm:h-[300px]" src="/assets/bayz-1.png" alt="">
+				</div>
+				<div>
+					<div class="mb-8">
+						<p class="text-xs sm:text-sm text-gray-500">
+							Mon expérience acquise au fil des projets me permet de mieux comprendre les attentes d'un client et de répondre précisement au besoin demandé en fonction du domaine d'activité.
+						</p>
+						<p class="text-xs sm:text-sm text-gray-500">
+							Du site vitrine au projet plus complexe, je vous propose une expertise et un développement web qui correspond à vos attentes & à vos besoins.
+						</p>
+					</div>
+
+					<ul class="grid grid-cols-1  sm:grid-cols-3 gap-5">
+						<li class="text-center">
+							<div class="text-2xl md:text-4xl font-semibold mb-2">
+								+{experienceYears}
+							</div>
+							<p class="text-xs sm:text-sm text-gray-500">
+								Années d'experience
+							</p>
+						</li>
+						<li class="text-center">
+							<div class="text-2xl md:text-4xl font-semibold mb-2">
+								+3
+							</div>
+							<p class="text-xs sm:text-sm text-gray-500">
+								Projets terminés
+							</p>
+						</li>
+						<li class="text-center">
+							<div class="text-2xl md:text-4xl font-semibold mb-2">
+								+1
+							</div>
+							<p class="text-xs sm:text-sm text-gray-500">
+								Clients satisfaits
+							</p>
+						</li>
+					</ul>
+
+					<div class="mt-12">
+						<a 
+							target="_blank" 
+							href="https://drive.google.com/file/d/1EzYm35pQ0EKdE4ziJwgAlMapVT54wQEg/view?usp=sharing" 
+							class="flex justify-center sm:inline-flex items-center text-sm px-6 py-4 font-medium text-white bg-gray-800 border border-gray-800 rounded-lg hover:bg-gray-100 hover:text-gray-800"
+							>
+							<svg class="w-3.5 h-3.5 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+								<path d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"/>
+								<path d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
+							</svg> Télécharger mon CV
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<SectionContact />
 	</main>
 </Layout>
-
-<style>
-	
-</style>

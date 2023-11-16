@@ -20,11 +20,15 @@ Inside this Astro project, you'll see the following folders and files:
 ```text
 /
 ├── public/
+│   ├── assets/
 │   └── favicon.svg
 ├── src/
 │   ├── components/
-│   │   └── Nav.astro
-│   │   └── Footer.astro
+│   │   ├── Nav.astro
+│   │   ├── NavDiv.astro
+│   │   ├── Footer.astro
+│   │   ├── SkillAccordionHeader.astro
+│   │   └── SkillAccordionItem.astro
 │   ├── layouts/
 │   │   └── Layout.astro
 │   └── pages/

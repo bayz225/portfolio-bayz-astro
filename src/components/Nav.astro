@@ -35,7 +35,7 @@ const linkList: {label: string, href: string}[] = [
                             <a 
                                 aria-current={Astro.url.pathname === href}
                                 class:list={[
-                                "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0",
+                                "block py-2 px-3 text-gray-600 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-800 md:p-0",
 								{
 									active:
 										Astro.url.pathname === href ||
@@ -57,6 +57,6 @@ const linkList: {label: string, href: string}[] = [
 <style>
     .active {
         --tw-text-opacity: 1;
-        color: rgb(28 100 242 / var(--tw-text-opacity))
+        color: rgb(31 41 55 / var(--tw-text-opacity));
     }
 </style>

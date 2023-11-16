@@ -1,0 +1,46 @@
+---
+import SkillAccordionItem from "@components/SkillAccordionItem.astro";
+
+export interface Props {
+    icon?: string,
+    label: string,
+    exp: number,
+    technos: {label: string, lvl: number}[],
+    key: number,
+}
+
+const { label, exp, technos, key, icon } = Astro.props;
+
+const expanded = key == 0;
+---
+<div>
+    <h2 id=`accordion-collapse-heading-${key}`>
+        <button 
+            type="button" 
+            class="flex items-center justify-between w-full bg-white py-4 font-medium rtl:text-right focus:ring-4 focus:ring-gray-200" 
+            data-accordion-target=`#accordion-collapse-body-${key}`
+            aria-expanded={expanded}
+            aria-controls=`accordion-collapse-body-${key}`
+            >
+            <div class="flex items-center">
+                <img src=`/assets/${icon}` class="w-10 mr-2" alt="">
+                <div class="">
+                    <h3 class="text-black text-start text-sm sm:text-base md:text-lg">
+                        {label}
+                    </h3>
+                    <p class="text-gray-500 text-start text-sm font-medium">
+                        Avec {exp > 1 ? `${exp} ans` : `${exp} an`} d'expériences
+                    </p>
+                </div>
+            </div>
+            <svg data-accordion-icon class="w-3 h-3 mr-2 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+            </svg>
+        </button>
+    </h2>
+    <div id=`accordion-collapse-body-${key}` class="hidden" aria-labelledby=`accordion-collapse-heading-${key}`>
+        <div class="pl-10 pt-6">
+            <SkillAccordionItem technos={technos} />
+        </div>
+    </div>
+</div>

@@ -1,11 +1,12 @@
 ---
+import NavDiv from "@components/NavDiv.astro";
 
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="text-gray-500 flex justify-center w-full">
-    <div class="flex justify-between items-center py-6 w-[600px]">
-        <a href="/" class="font-semibold text-lg sm:text-2xl flex items-center">
+    <NavDiv classes="justify-center">
+        <a href="/" class="font-semibold text-base sm:text-lg md:text-xl flex items-center">
             <svg class="w-5 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
             </svg>
@@ -14,9 +15,9 @@ const currentYear = new Date().getFullYear();
             </div>
         </a>
     
-        <div class="px-2 text-xs sm:text-sm sm:px-0">
-            <p>&copy; {currentYear} Designed & Developed by bayz225</p>
+        <div class="p-2 flex text-xs sm:text-sm sm:px-0 sm:py-0">
+            <div class="pr-2">&copy; {currentYear} Designed & Developed by bayz225</div> <div class=" border-l border-gray-500 pl-2">Unicons by <a class="text-blue-600" href="https://iconscout.com/">IconScout</a></div>
         </div>
-    </div>
+    </NavDiv>
 </footer>
 

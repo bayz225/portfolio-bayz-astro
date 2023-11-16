@@ -1,14 +1,16 @@
 ---
+import NavDiv from "@components/NavDiv.astro";
+
 const linkList: {label: string, href: string}[] = [
     {label: 'Acceuil', href: '/'},
     {label: 'Projects', href: '/projects/'},
-    {label: 'A propos', href: '/about/'},
-    {label: 'Contact', href: '/contact-me/'},
+    {label: 'A propos', href: '#about-me'},
+    {label: 'Contact', href: '#contact'},
 ]
 ---
 
 <nav class="border-gray-200 flex justify-center bg-gray-50">
-    <div class="flex flex-wrap items-center w-[600px] justify-between mx-auto py-4">
+    <NavDiv>
         <a href="/" class="font-semibold text-lg sm:text-2xl flex items-center">
             <svg class="w-5 h-4 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
@@ -33,7 +35,7 @@ const linkList: {label: string, href: string}[] = [
                             <a 
                                 aria-current={Astro.url.pathname === href}
                                 class:list={[
-                                "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0",
+                                "block py-2 px-3 text-gray-600 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-800 md:p-0",
 								{
 									active:
 										Astro.url.pathname === href ||
@@ -49,12 +51,12 @@ const linkList: {label: string, href: string}[] = [
                 }
             </ul>
         </div>
-    </div>
+    </NavDiv>
 </nav>
 
 <style>
     .active {
         --tw-text-opacity: 1;
-        color: rgb(28 100 242 / var(--tw-text-opacity))
+        color: rgb(31 41 55 / var(--tw-text-opacity));
     }
 </style>

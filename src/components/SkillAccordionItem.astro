@@ -1,0 +1,20 @@
+---
+export interface Props {
+    technos: {label: string, lvl: number}[],
+}
+
+const {technos} = Astro.props;
+---
+{
+    technos.map(({label, lvl}) => (
+        <div class="mb-6">
+            <div class="flex justify-between mb-2 text-xs">
+                <span>{label}</span>
+                <span>{lvl}%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div class="bg-gray-800 h-2.5 rounded-full" style={`width: ${lvl}%`}></div>
+            </div>
+        </div>
+    ))
+}

@@ -29,7 +29,7 @@ const expanded = key == 0;
                         {label}
                     </h3>
                     <p class="text-gray-500 text-start text-sm font-medium">
-                        Avec {exp > 1 ? `${exp} ans` : `${exp} an`} d'expériences
+                        Avec {exp > 1 ? `${exp} ans` : (exp < 1 ?  `-1 an` : `${exp} an`)} d'expérience
                     </p>
                 </div>
             </div>

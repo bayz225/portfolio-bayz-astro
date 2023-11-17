@@ -12,8 +12,9 @@ const linkList: {label: string, href: string}[] = [
 <nav class="border-gray-200 flex justify-center bg-gray-50">
     <NavDiv>
         <a href="/" class="font-semibold text-lg sm:text-2xl flex items-center">
-            <svg class="w-5 h-4 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 13 5.7-5.326a.909.909 0 0 0 0-1.348L1 1"/>
+            
+            <svg class="w-5 h-5 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4 1 8l4 4m10-8 4 4-4 4M11 1 9 15"/>
             </svg>
             <div>
                 Bayz<span class="text-blue-600">.</span>
@@ -27,7 +28,7 @@ const linkList: {label: string, href: string}[] = [
         </button>
 
         <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
-            <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
+            <ul class="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
                 
                 {
                     linkList.map(({label, href}) => (

@@ -1,0 +1,96 @@
+---
+
+import ProjectImg from '@components/ProjectImg.astro';
+import SectionMedium from '@components/SectionMedium.astro';
+import Layout from '@layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+
+export interface Props {
+    project: CollectionEntry<'project'>;
+}
+
+export async function getStaticPaths() {
+    const allProjects = getCollection('project');
+    
+    return (await allProjects).map((project) => ({
+        params: {slug: project.slug},
+        props: {project}
+    }))
+}
+
+const {project} = Astro.props;
+const {Content} = await project.render();
+---
+
+<Layout title={`Project | ${project.data.title}`}>
+    <SectionMedium id="project">
+        <h1 class="text-center text-2xl sm:text-3xl md:text-4xl font-semibold mb-20 italic">
+            {project.data.title}
+        </h1>
+        
+        {
+            project.data.image ? <ProjectImg src={project.data.image.image_src} alt={project.data.image.image_src} /> : ('')
+        }
+        
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div>
+                <h2 class="text-xl md:text-3xl font-semibold mb-4">Description</h2>
+                <p class="pb-4 border-b text-gray-500 text-sm">
+                    {project.data.description}
+                </p>
+
+                <div class="mt-4 text-sm content">
+                    <Content/>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-xl md:text-3xl font-semibold pb-4 border-b">Info projet</h2>
+                <div class="mt-4 space-y-2 text-sm">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-blue-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm14-7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm-5-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm-5-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4Z"/>
+                        </svg> 
+                        <p>Année : 
+                            <span class="font-semibold">
+                                le {project.data.created_at.getDate()}/{project.data.created_at.getMonth()}/{project.data.created_at.getFullYear()}</p>
+                            </span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-red-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                            <path d="M15.045.007 9.31 0a1.965 1.965 0 0 0-1.4.585L.58 7.979a2 2 0 0 0 0 2.805l6.573 6.631a1.956 1.956 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 18 8.479v-5.5A2.972 2.972 0 0 0 15.045.007Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <p>Catégorie : <span class="font-semibold">{project.data.category}</span></p>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 19 19">
+                            <path d="M1 19h13a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H0v10a1 1 0 0 0 1 1ZM0 6h7.443l-1.2-1.6a1 1 0 0 0-.8-.4H1a1 1 0 0 0-1 1v1Z"/>
+                            <path d="M17 4h-4.557l-2.4-3.2a2.009 2.009 0 0 0-1.6-.8H4a2 2 0 0 0-2 2h3.443a3.014 3.014 0 0 1 2.4 1.2l2.1 2.8H14a3 3 0 0 1 3 3v8a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Z"/>
+                        </svg>
+                        <p>Type : <span class="font-semibold">{project.data.type}</span></p>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t">
+                    <h3 class="mb-2 font-semibold">Technologie</h3>
+                    <div>
+                        {
+                            project.data.technology.map((t) => (
+                                <span class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                                    {t}
+                                </span>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </SectionMedium>
+</Layout>
+
+<style>
+    .content :global(p){
+        color: gray;
+        margin-bottom: 5px;
+    }
+</style>

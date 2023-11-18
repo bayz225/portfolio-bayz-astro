@@ -1,8 +1,13 @@
 ---
+import { getCollection } from 'astro:content';
+
 import Layout from '@layouts/Layout.astro';
 import SectionHeader from '@components/SectionHeader.astro';
 import SectionContact from '@components/SectionContact.astro'
 import SkillAccordionHeader from '@components/SkillAccordionHeader.astro';
+import SectionLarge from '@components/SectionLarge.astro';
+import SectionMedium from '@components/SectionMedium.astro';
+import ProjectCard from '@components/ProjectCard.astro';
 
 const skills = [
 	{
@@ -50,14 +55,52 @@ const skills = [
 	},
 ];
 
+/**
+ * Fonction de filtrage des projet par date
+ * @param {Object} a 
+ * @param {Object} b 
+ * @returns {boolean}
+ */
+function sortByDate (a, b) {
+	return b.data.created_at.valueOf() - a.data.created_at.valueOf();
+}
 
+const projects = (await getCollection('project'));
+
+const allProjects = projects.sort(sortByDate);
+
+/**
+ * Cette fonction renvoir tous les projets ranger par catégorie
+ * @returns {label: string, data: array}
+ */
+function getCateg() {
+	const categ = [...new Set(allProjects.map((p) => p.data.category).flat())];
+	categ.splice(0, 0, 'Tous');
+
+	return categ.map((c) => {
+		const data = c == 'Tous' ? projects : projects.filter((p) => p.data.category == c)
+
+		return {
+			label: c,
+			data
+		}
+	})
+}
 
 const experienceYears = new Date().getFullYear() - 2020;
+const categ = getCateg();
+const categLabels: Array<string> = [];
+const categData: Array<object> = [];
+
+categ.forEach((c) => {
+	categLabels.push(c.label)
+	categData.push(c.data)
+});
 ---
 
 <Layout title="Bayz portfolio">
 	<main>
-		<section id="hero" class="flex px-2 sm:px-[25px] md:px-[50px] lg:px-[100px] my-[100px]">
+		<SectionMedium id="hero">
 			<div class="w-full lg:w-2/4 text-center lg:text-start mb-4">
 				<h1 class="text-2xl sm:text-3xl md:text-4xl font-semibold mb-4">
 					Développeur Web Freelance & Formateur.
@@ -79,9 +122,9 @@ const experienceYears = new Date().getFullYear() - 2020;
 					</a>
 				</div>
 			</div>
-		</section>
+		</SectionMedium>
 
-		<section id="services" class="px-2 sm:px-[25px] md:px-[50px] lg:px-[100px] my-[100px]">
+		<SectionMedium id="services">
 			<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 				<div class="flex flex-col items-center sm:items-start">
 					<svg class="w-6 h-6 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 21">
@@ -119,9 +162,9 @@ const experienceYears = new Date().getFullYear() - 2020;
 					</p>
 				</div>
 			</div>
-		</section>
+		</SectionMedium>
 
-		<section id="skills" class="px-2 sm:px-[25px] md:px-[50px] lg:px-[100px] sm:pt-[50px] md:pt-[100px] my-[100px]">
+		<SectionLarge id="skills" >
 			<SectionHeader title='Mes Compétences' description='Des compétences à votre service'/>
 
 			<div id="accordion-collapse" data-accordion="collapse">
@@ -133,13 +176,64 @@ const experienceYears = new Date().getFullYear() - 2020;
 					}
 				</div>
 			</div>
-		</section>
+		</SectionLarge>
 
-		<section class="px-2 sm:px-[25px] md:px-[50px] lg:px-[100px] sm:pt-[50px] md:pt-[100px] my-[100px]">
-			<SectionHeader title="Porfolio" description="Quelque projet" />
-		</section>
+		<SectionLarge id="projects" classes='bg-gray-50'>
+			<SectionHeader title="Porfolio" description="Une partie des projets sur lesquels j'ai travaillé" />
 
-		<section id="about-me" class="px-2 sm:px-[25px] md:px-[50px] lg:px-[100px] sm:pt-[50px] md:pt-[100px] my-[100px]">
+			<div class="mt-20">
+				<div class="mb-4 border-b border-gray-200">
+					<ul class="flex flex-wrap justify-center -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
+					{
+						categLabels.map((label) => (
+							<li class="me-2" role="presentation">
+								<button 
+									class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300" 
+									id={`${label.toLowerCase().replace(' ', '-')}-tab`}
+									data-tabs-target={`#${label.toLowerCase().replace(' ', '-')}`} 
+									type="button" 
+									role="tab" 
+									aria-controls={`${label.toLowerCase().replace(' ', '-')}`} 
+									aria-selected="false"
+									>
+									{label}
+								</button>
+							</li>
+						))
+					}
+					</ul>
+				</div>
+				<div id="default-tab-content">
+					{
+						categ.map(({label ,data}) => (
+						<div 
+							class="hidden p-2 rounded-lg bg-gray-50 dark:bg-gray-800" 
+							id={`${label.toLowerCase().replace(' ', '-')}`}
+							role="tabpanel" 
+							aria-labelledby={`${label.toLowerCase().replace(' ', '-')}-tab`}
+						>
+							<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+								{
+									data.map(({slug, data}) => (
+										<ProjectCard 
+											href={`/project/${slug}`}
+											category={data.category}
+											img={data.image?.image_src}
+											entreprise={data.entreprise}
+											title={data.title}
+											/>
+									))
+								}
+							</div>
+						</div>
+						))
+					}
+					
+				</div>
+			</div>
+		</SectionLarge>
+
+		<SectionLarge id="about-me">
 			<SectionHeader title='À propos' description="Je suis développeur web freelance et j'aime ça !"/>
 
 			<div class="grid sm:grid-cols-1 md:grid-cols-2 gap-4 mt-[50px]">
@@ -197,7 +291,7 @@ const experienceYears = new Date().getFullYear() - 2020;
 					</div>
 				</div>
 			</div>
-		</section>
+		</SectionLarge>
 
 		<SectionContact />
 	</main>

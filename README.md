@@ -24,17 +24,11 @@ Inside this Astro project, you'll see the following folders and files:
 │   └── favicon.svg
 ├── src/
 │   ├── components/
-│   │   ├── Nav.astro
-│   │   ├── NavDiv.astro
-│   │   ├── Footer.astro
-│   │   ├── SectionContact.astro
-│   │   ├── SectionHeader.astro
-│   │   ├── SkillAccordionHeader.astro
-│   │   └── SkillAccordionItem.astro
+│   ├── content/
+│   │   └── project/
 │   ├── layouts/
-│   │   └── Layout.astro
 │   └── pages/
-│       └── index.astro
+│       └── project/
 └── package.json
 ```
 

@@ -12,13 +12,13 @@ const {href, img, entreprise, title, category} = Astro.props;
 
 <a href={href}>
     <img 
-        class="w-full h-auto"
+        class="h-auto max-w-full"
         src={
             img ? `/assets/${img}` : "/assets/stock-1.jpg"
         }
     >
     <div class="flex flex-col items-center py-4">
         <h4 class=" uppercase font-light text-xs md:text-sm mb-2">{title}</h4>
-        <div class="text-xs md:text-sm">{entreprise ?? category}</div>
+        <div class="text-xs md:text-sm font-semibold">{entreprise ?? category}</div>
     </div>
 </a>

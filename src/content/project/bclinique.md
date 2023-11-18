@@ -2,10 +2,13 @@
 title: Bclinique
 description: |
     Bclinique un est projet personnel que j'ai créé pour améliorer mes compétences en laravel, en intégrant 'laravel-dompdf', un système de mailing et la gestion des roles.
-created_at: 2023-09-10
+created_at: 2023-08-14
 category: Developpement Web
 type: Projet personnel
-technology: ['Laravel', 'Php', 'Tailwind', 'SQL']
+technology: ['Laravel', 'Blade', 'Php', 'Tailwind', 'SQL']
+image:
+    image_src: bclinique-img.png
+link: https://github.com/bayz225/bclinique
 ---
 -Conception graphique (Adobe XD)
 

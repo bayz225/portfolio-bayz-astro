@@ -6,5 +6,8 @@ created_at: 2023-09-10
 category: Design
 type: Projet client
 technology: ['XD', 'Canvas']
+image:
+    image_src: esprit-prod.png
+entreprise: Esprit Prod
 ---
 -Conception graphique Canvas

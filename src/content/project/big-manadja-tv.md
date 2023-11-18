@@ -5,8 +5,9 @@ description: |
 created_at: 2022-05-01
 category: Developpement Web
 type: Projet client
-technology: ['Symfony', 'Php', 'Bootstrap', 'MySQL']
+technology: ['Symfony', 'Twig', 'Php', 'Bootstrap', 'MySQL']
 entreprise: Cabinet CIEDI
+link: https://bigmanadja-tv.ci
 ---
 -Conception graphique (Adobe XD)
 
